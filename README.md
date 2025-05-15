@@ -1,2 +1,38 @@
 # AWSProject
 Cloud Project Deployed on AWS
+
+# AWS Cloud Infrastructure Project
+
+This project demonstrates an end-to-end AWS setup using Terraform, CloudFormation, Lambda, and Boto3 scripts.
+
+---
+
+## ✅ Part A: Infrastructure Deployment
+
+- **Terraform**: Creates VPC, public/private subnets, NAT gateway, route tables, and security groups.
+- **CloudFormation**: Deploys EC2 (web server), RDS (MySQL), and Lambda.
+- **Web App**: Apache installed on EC2 via UserData to serve a simple HTML page.
+- **RDS Setup**: EC2 connects to RDS and stores sample user data.
+- **Auto Scaling**: Set up via EC2 Launch Template and Auto Scaling Group (min=1, max=3 instances).
+
+---
+
+## ✅ Part B: Lambda Logging for S3 Uploads
+
+- Created an S3 bucket: `chaitanya-uploadlogs`
+- Lambda function `LogS3Uploads` logs file upload events to CloudWatch.
+- Triggered on all `PUT` events to the S3 bucket.
+
+---
+
+## ✅ Part C: AWS CLI & Boto3 Interaction
+
+Python scripts using Boto3:
+- `create_and_upload_to_s3.py`: Creates a bucket and uploads a file.
+- `get_instance_metadata.py`: Retrieves metadata from inside EC2.
+- `list_running_instances.py`: Lists running EC2 instances.
+- `invoke_lambda.py`: Manually invokes the Lambda function with a mock S3 event.
+
+AWS CLI was also used to validate services and manage resources.
+
+---
