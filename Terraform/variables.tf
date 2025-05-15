@@ -19,6 +19,6 @@ variable "availability_zones" {
 }
 
 variable "my_ip" {
-  description = "Your IP address for SSH (replace this or override via tfvars)"
+  description = "Your IP address for SSH"
   default     = "YOUR_IP/32"
 }
