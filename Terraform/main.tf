@@ -18,7 +18,7 @@ resource "aws_internet_gateway" "igw" {
 
 # Elastic IP for NAT
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 }
 
 # Public Subnets
