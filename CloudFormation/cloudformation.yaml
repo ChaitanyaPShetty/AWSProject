@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2, RDS, and Lambda deployment via Infrastructure Composer
+
+Resources:
+
+  ### EC2 Instance
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0c2b8ca1dad447f8a # Amazon Linux 2
+      SubnetId: subnet-0554adbb2aa05a5b9 # Public Subnet from Terraform
+      SecurityGroupIds:
+        - sg-0a40d3dbaa0257bea
+      Tags:
+        - Key: Name
+          Value: CloudFormation-WebServer
+      UserData: !Base64 |
+        #!/bin/bash
+        yum update -y
+        yum install -y httpd
+        echo "<h1>Hello from EC2 via Infrastructure Composer</h1>" > /var/www/html/index.html
+        systemctl start httpd
+        systemctl enable httpd
+
+  ### RDS Subnet Group
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Private subnets for RDS
+      SubnetIds:
+        - subnet-0fd426c0490d40e8a
+        - subnet-06de03993cb5d74cb
+
+  ### RDS MySQL Instance
+  MyRDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: mydb-instance
+      AllocatedStorage: 20
+      DBInstanceClass: db.t3.micro
+      Engine: mysql
+      MasterUsername: admin
+      MasterUserPassword: Password123!
+      VPCSecurityGroups:
+        - sg-0f93204228510e3e2
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      MultiAZ: false
+      PubliclyAccessible: false
+
+  ### Lambda Execution Role
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaExecutionRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  ### Lambda Function
+  MyLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: LogMessageLambda
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: python3.11
+      Timeout: 5
+      Code:
+        ZipFile: |
+          import json
+          def lambda_handler(event, context):
+              print("Lambda invoked successfully")
+              return {
+                  "statusCode": 200,
+                  "body": json.dumps("Hello from Lambda!")
+              }
