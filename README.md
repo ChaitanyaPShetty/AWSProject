@@ -45,3 +45,5 @@ AWS CLI was also used to validate services and manage resources.
 
 - API Gateway: Configured to expose the LogMessageLambda function via a public HTTP endpoint, allowing it to be triggered using a POST request.
 - Step Function Workflow: Created a state machine that automates the sequential execution of LogS3Lambda followed by LogMessageLambda, enabling chained Lambda orchestration without manual triggers.
+
+---
