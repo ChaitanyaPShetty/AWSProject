@@ -3,7 +3,7 @@ Cloud Project Deployed on AWS
 
 ## 🗺️ Architecture Diagram
 
-![AWS Architecture](Images/Architecture.png)
+![AWS Architecture]()
 
 # AWS Cloud Infrastructure Project
 
