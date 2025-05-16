@@ -5,7 +5,6 @@ Cloud Project Deployed on AWS
 
 ![AWS Architecture](Images/Architecture.png)
 
-
 # AWS Cloud Infrastructure Project
 
 This project demonstrates an end-to-end AWS setup using Terraform, CloudFormation, Lambda, and Boto3 scripts.
