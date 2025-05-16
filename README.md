@@ -29,7 +29,7 @@ This project demonstrates an end-to-end AWS setup using Terraform, CloudFormatio
 
 ---
 
-## Part C: AWS CLI & Boto3 Interaction
+## Part 3: AWS CLI & Boto3 Interaction
 
 Python scripts using Boto3:
 - `create_and_upload_to_s3.py`: Creates a bucket and uploads a file.
@@ -40,3 +40,8 @@ Python scripts using Boto3:
 AWS CLI was also used to validate services and manage resources.
 
 ---
+
+## Part 4: API Gateway & Step Functions
+
+- API Gateway: Configured to expose the LogMessageLambda function via a public HTTP endpoint, allowing it to be triggered using a POST request.
+- Step Function Workflow: Created a state machine that automates the sequential execution of LogS3Lambda followed by LogMessageLambda, enabling chained Lambda orchestration without manual triggers.
