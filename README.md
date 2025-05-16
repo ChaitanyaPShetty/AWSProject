@@ -11,7 +11,7 @@ This project demonstrates an end-to-end AWS setup using Terraform, CloudFormatio
 
 ---
 
-## ✅ Part A: Infrastructure Deployment
+## Part 1: Infrastructure Deployment
 
 - **Terraform**: Creates VPC, public/private subnets, NAT gateway, route tables, and security groups.
 - **CloudFormation**: Deploys EC2 (web server), RDS (MySQL), and Lambda.
@@ -21,7 +21,7 @@ This project demonstrates an end-to-end AWS setup using Terraform, CloudFormatio
 
 ---
 
-## ✅ Part B: Lambda Logging for S3 Uploads
+## Part 2: Lambda Logging for S3 Uploads
 
 - Created an S3 bucket: `chaitanya-uploadlogs`
 - Lambda function `LogS3Uploads` logs file upload events to CloudWatch.
@@ -29,7 +29,7 @@ This project demonstrates an end-to-end AWS setup using Terraform, CloudFormatio
 
 ---
 
-## ✅ Part C: AWS CLI & Boto3 Interaction
+## Part C: AWS CLI & Boto3 Interaction
 
 Python scripts using Boto3:
 - `create_and_upload_to_s3.py`: Creates a bucket and uploads a file.
