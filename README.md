@@ -23,7 +23,7 @@ This project demonstrates an end-to-end AWS setup using Terraform, CloudFormatio
 
 ## Part 2: Lambda Logging for S3 Uploads
 
-- Created an S3 bucket: `chaitanya-uploadlogs`
+- Created an S3 bucket: `S3-uploadlogs`
 - Lambda function `LogS3Uploads` logs file upload events to CloudWatch.
 - Triggered on all `PUT` events to the S3 bucket.
 
